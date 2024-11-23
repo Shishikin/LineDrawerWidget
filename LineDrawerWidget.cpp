@@ -1,6 +1,7 @@
 ﻿#include "LineDrawerWidget.h"
 #include <QPainter>
 #include <QMouseEvent>
+#include <QDebug>
 
 LineDrawerWidget::LineDrawerWidget(QWidget* parent)
     : QWidget(parent), isDrawing(false)  // Инициализация виджета и установка флага isDrawing в false
@@ -78,14 +79,14 @@ void LineDrawerWidget::resizeEvent(QResizeEvent* event) {
 
         // Масштабируем все линии
         for (auto& line : lines) {
-            qDebug() << "old point:" << line.first << " scaleX:" << scaleX << " scaleY:" << scaleY;
+            qDebug() << QString::fromUtf8("Старая точка:") << line.first << " scaleX:" << scaleX << " scaleY:" << scaleY;
             line.first.setX(line.first.x() * scaleX);
             line.first.setY(line.first.y() * scaleY);
-            qDebug() << "new point:" << line.first;
-            qDebug() << "old point:" << line.second << " scaleX:" << scaleX << " scaleY:" << scaleY;
+            qDebug() << QString::fromUtf8("Новая точка:") << line.first;
+            qDebug() << QString::fromUtf8("Старая точка:") << line.second << " scaleX:" << scaleX << " scaleY:" << scaleY;
             line.second.setX(line.second.x() * scaleX);
             line.second.setY(line.second.y() * scaleY);
-            qDebug() << "new point:" << line.second;
+            qDebug() << QString::fromUtf8("Новая точка:") << line.second;
         }
     }
     update(); // Перерисовка после изменения размеров

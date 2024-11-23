@@ -1,12 +1,12 @@
-#include <QtWidgets>
+﻿#include <QtWidgets>
 #include "MainForm.h"
 #include "LineDrawerWidget.h"
 
 MainForm::MainForm(QWidget* parent) : QWidget(parent)
 {
-	pushButtonClear = new QPushButton;
-	pushButtonSave = new QPushButton;
-	pushButtonDownload = new QPushButton;
+	pushButtonClear = new QPushButton("Очистить");	
+	pushButtonSave = new QPushButton("Сохранить");
+	pushButtonDownload = new QPushButton("Загрузить");
 	m_lineDrawerWidget = new LineDrawerWidget;
 	
 	QHBoxLayout* buttonLayout = new QHBoxLayout;	
@@ -17,5 +17,8 @@ MainForm::MainForm(QWidget* parent) : QWidget(parent)
 	mainLayout->addWidget(m_lineDrawerWidget, 1);
 	mainLayout->addLayout(buttonLayout);
 	setLayout(mainLayout);
+
+	connect(pushButtonClear, &QPushButton::clicked, m_lineDrawerWidget, &LineDrawerWidget::clearLines);
+
 
 }

@@ -1,30 +1,31 @@
-#include "LineDrawerWidget.h"
+Ôªø#include "LineDrawerWidget.h"
 #include <QPainter>
 #include <QMouseEvent>
 
 LineDrawerWidget::LineDrawerWidget(QWidget* parent)
-    : QWidget(parent), isDrawing(false)  // »ÌËˆË‡ÎËÁ‡ˆËˇ ‚Ë‰ÊÂÚ‡ Ë ÛÒÚ‡ÌÓ‚Í‡ ÙÎ‡„‡ isDrawing ‚ false
+    : QWidget(parent), isDrawing(false)  // –ò–Ω–∏—Ü–∏–∞–ª–∏–∑–∞—Ü–∏—è –≤–∏–¥–∂–µ—Ç–∞ –∏ —É—Å—Ç–∞–Ω–æ–≤–∫–∞ —Ñ–ª–∞–≥–∞ isDrawing –≤ false
 {
+    setMinimumSize(200, 200); // –£—Å—Ç–∞–Ω–∞–≤–ª–∏–≤–∞–µ–º –º–∏–Ω–∏–º–∞–ª—å–Ω—ã–π —Ä–∞–∑–º–µ—Ä
 }
 
-// Œ˜Ë˘‡ÂÚ ‚ÒÂ ÓÚÂÁÍË Ë Ó·ÌÓ‚ÎˇÂÚ ‚Ë‰ÊÂÚ ‰Îˇ ÔÂÂËÒÓ‚ÍË
+// –û—á–∏—â–∞–µ—Ç –≤—Å–µ –æ—Ç—Ä–µ–∑–∫–∏ –∏ –æ–±–Ω–æ–≤–ª—è–µ—Ç –≤–∏–¥–∂–µ—Ç –¥–ª—è –ø–µ—Ä–µ—Ä–∏—Å–æ–≤–∫–∏
 void LineDrawerWidget::clearLines()
 {
-    lines.clear();  // Œ˜Ë˘‡ÂÏ ‚ÂÍÚÓ ÓÚÂÁÍÓ‚
-    update();       // «‡Ô‡¯Ë‚‡ÂÏ ÔÂÂËÒÓ‚ÍÛ ‚Ë‰ÊÂÚ‡
+    lines.clear();  // –û—á–∏—â–∞–µ–º –≤–µ–∫—Ç–æ—Ä –æ—Ç—Ä–µ–∑–∫–æ–≤
+    update();       // –ó–∞–ø—Ä–∞—à–∏–≤–∞–µ–º –ø–µ—Ä–µ—Ä–∏—Å–æ–≤–∫—É –≤–∏–¥–∂–µ—Ç–∞
 }
 
-// ÃÂÚÓ‰ ÓÚËÒÓ‚ÍË, ‚˚Á˚‚‡ÂÏ˚È ÔË ÌÂÓ·ıÓ‰ËÏÓÒÚË ÔÂÂËÒÓ‚‡Ú¸ ‚Ë‰ÊÂÚ
+// –ú–µ—Ç–æ–¥ –æ—Ç—Ä–∏—Å–æ–≤–∫–∏, –≤—ã–∑—ã–≤–∞–µ–º—ã–π –ø—Ä–∏ –Ω–µ–æ–±—Ö–æ–¥–∏–º–æ—Å—Ç–∏ –ø–µ—Ä–µ—Ä–∏—Å–æ–≤–∞—Ç—å –≤–∏–¥–∂–µ—Ç
 void LineDrawerWidget::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
     painter.fillRect(0, 0, size().width(), size().height(), QColor(205, 205, 205));
-    painter.setPen(Qt::black);  // ”ÒÚ‡Ì‡‚ÎË‚‡ÂÏ ˜ÂÌ˚È ˆ‚ÂÚ ‰Îˇ ËÒÓ‚‡ÌËˇ ÎËÌËÈ
+    painter.setPen(Qt::black);  // –£—Å—Ç–∞–Ω–∞–≤–ª–∏–≤–∞–µ–º —á–µ—Ä–Ω—ã–π —Ü–≤–µ—Ç –¥–ª—è —Ä–∏—Å–æ–≤–∞–Ω–∏—è –ª–∏–Ω–∏–π
 
-    // ŒÚËÒÓ‚˚‚‡ÂÏ ‚ÒÂ ÒÓı‡ÌÂÌÌ˚Â ÓÚÂÁÍË
+    // –û—Ç—Ä–∏—Å–æ–≤—ã–≤–∞–µ–º –≤—Å–µ —Å–æ—Ö—Ä–∞–Ω–µ–Ω–Ω—ã–µ –æ—Ç—Ä–µ–∑–∫–∏
     for (const auto& line : lines)
     {
-        painter.drawLine(line.first, line.second);  // –ËÒÛÂÏ ÓÚÂÁÓÍ ÓÚ Ì‡˜‡Î¸ÌÓÈ ‰Ó ÍÓÌÂ˜ÌÓÈ ÚÓ˜ÍË
+        painter.drawLine(line.first, line.second);  // –†–∏—Å—É–µ–º –æ—Ç—Ä–µ–∑–æ–∫ –æ—Ç –Ω–∞—á–∞–ª—å–Ω–æ–π –¥–æ –∫–æ–Ω–µ—á–Ω–æ–π —Ç–æ—á–∫–∏
     }
     if (isDrawing)
     {
@@ -33,38 +34,59 @@ void LineDrawerWidget::paintEvent(QPaintEvent* event)
 
 }
 
-
-
-
-// Œ·‡·‡Ú˚‚‡ÂÚ Ì‡Ê‡ÚËÂ ÎÂ‚ÓÈ ÍÌÓÔÍË Ï˚¯Ë
+// –û–±—Ä–∞–±–∞—Ç—ã–≤–∞–µ—Ç –Ω–∞–∂–∞—Ç–∏–µ –ª–µ–≤–æ–π –∫–Ω–æ–ø–∫–∏ –º—ã—à–∏
 void LineDrawerWidget::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton)  // œÓ‚ÂˇÂÏ, ˜ÚÓ Ì‡Ê‡Ú‡ ËÏÂÌÌÓ ÎÂ‚‡ˇ ÍÌÓÔÍ‡
+    if (event->button() == Qt::LeftButton)  // –ü—Ä–æ–≤–µ—Ä—è–µ–º, —á—Ç–æ –Ω–∞–∂–∞—Ç–∞ –∏–º–µ–Ω–Ω–æ –ª–µ–≤–∞—è –∫–Ω–æ–ø–∫–∞
     {
-        startPoint = event->pos();  // ”ÒÚ‡Ì‡‚ÎË‚‡ÂÏ Ì‡˜‡Î¸ÌÛ˛ ÚÓ˜ÍÛ ‚ ÚÂÍÛ˘Û˛ ÔÓÁËˆË˛ Ï˚¯Ë
-        endPoint = startPoint;      // »ÌËˆË‡ÎËÁËÛÂÏ ÍÓÌÂ˜ÌÛ˛ ÚÓ˜ÍÛ Í‡Í Ì‡˜‡Î¸ÌÛ˛
-        isDrawing = true;           // ”ÒÚ‡Ì‡‚ÎË‚‡ÂÏ ÙÎ‡„, ˜ÚÓ Ë‰ÂÚ ËÒÓ‚‡ÌËÂ
+        startPoint = event->pos();  // –£—Å—Ç–∞–Ω–∞–≤–ª–∏–≤–∞–µ–º –Ω–∞—á–∞–ª—å–Ω—É—é —Ç–æ—á–∫—É –≤ —Ç–µ–∫—É—â—É—é –ø–æ–∑–∏—Ü–∏—é –º—ã—à–∏
+        endPoint = startPoint;      // –ò–Ω–∏—Ü–∏–∞–ª–∏–∑–∏—Ä—É–µ–º –∫–æ–Ω–µ—á–Ω—É—é —Ç–æ—á–∫—É –∫–∞–∫ –Ω–∞—á–∞–ª—å–Ω—É—é
+        isDrawing = true;           // –£—Å—Ç–∞–Ω–∞–≤–ª–∏–≤–∞–µ–º —Ñ–ª–∞–≥, —á—Ç–æ –∏–¥–µ—Ç —Ä–∏—Å–æ–≤–∞–Ω–∏–µ
     }
 }
 
-// Œ·‡·‡Ú˚‚‡ÂÚ ÔÂÂÏÂ˘ÂÌËÂ Ï˚¯Ë Ò Á‡Ê‡ÚÓÈ ÍÌÓÔÍÓÈ
+// –û–±—Ä–∞–±–∞—Ç—ã–≤–∞–µ—Ç –ø–µ—Ä–µ–º–µ—â–µ–Ω–∏–µ –º—ã—à–∏ —Å –∑–∞–∂–∞—Ç–æ–π –∫–Ω–æ–ø–∫–æ–π
 void LineDrawerWidget::mouseMoveEvent(QMouseEvent* event)
 {
-    if (isDrawing)  // ≈ÒÎË Ë‰ÂÚ ËÒÓ‚‡ÌËÂ
+    if (isDrawing)  // –ï—Å–ª–∏ –∏–¥–µ—Ç —Ä–∏—Å–æ–≤–∞–Ω–∏–µ
     {
-        endPoint = event->pos();  // Œ·ÌÓ‚ÎˇÂÏ ÍÓÌÂ˜ÌÛ˛ ÚÓ˜ÍÛ ‚ ÚÂÍÛ˘Û˛ ÔÓÁËˆË˛ Ï˚¯Ë
-        update();                 // «‡Ô‡¯Ë‚‡ÂÏ ÔÂÂËÒÓ‚ÍÛ ‚Ë‰ÊÂÚ‡
+        endPoint = event->pos();  // –û–±–Ω–æ–≤–ª—è–µ–º –∫–æ–Ω–µ—á–Ω—É—é —Ç–æ—á–∫—É –≤ —Ç–µ–∫—É—â—É—é –ø–æ–∑–∏—Ü–∏—é –º—ã—à–∏
+        update();                 // –ó–∞–ø—Ä–∞—à–∏–≤–∞–µ–º –ø–µ—Ä–µ—Ä–∏—Å–æ–≤–∫—É –≤–∏–¥–∂–µ—Ç–∞
     }
 }
 
-// Œ·‡·‡Ú˚‚‡ÂÚ ÓÚÔÛÒÍ‡ÌËÂ ÎÂ‚ÓÈ ÍÌÓÔÍË Ï˚¯Ë
+// –û–±—Ä–∞–±–∞—Ç—ã–≤–∞–µ—Ç –æ—Ç–ø—É—Å–∫–∞–Ω–∏–µ –ª–µ–≤–æ–π –∫–Ω–æ–ø–∫–∏ –º—ã—à–∏
 void LineDrawerWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton)  // ≈ÒÎË ÓÚÔÛ˘ÂÌ‡ ÎÂ‚‡ˇ ÍÌÓÔÍ‡ Ë Ë‰ÂÚ ËÒÓ‚‡ÌËÂ
+    if (event->button() == Qt::LeftButton)  // –ï—Å–ª–∏ –æ—Ç–ø—É—â–µ–Ω–∞ –ª–µ–≤–∞—è –∫–Ω–æ–ø–∫–∞ –∏ –∏–¥–µ—Ç —Ä–∏—Å–æ–≤–∞–Ω–∏–µ
     {
-        endPoint = event->pos();  // ‘ËÍÒËÛÂÏ ÍÓÌÂ˜ÌÛ˛ ÚÓ˜ÍÛ
-        lines.append(qMakePair(startPoint, endPoint));  // —Óı‡ÌˇÂÏ ÚÂÍÛ˘ËÈ ÓÚÂÁÓÍ ‚ ÒÔËÒÓÍ
-        isDrawing = false;  // —·‡Ò˚‚‡ÂÏ ÙÎ‡„ ËÒÓ‚‡ÌËˇ
-        update();           // «‡Ô‡¯Ë‚‡ÂÏ ÔÂÂËÒÓ‚ÍÛ ‚Ë‰ÊÂÚ‡ ‰Îˇ ÓÚÓ·‡ÊÂÌËˇ ÌÓ‚Ó„Ó ÓÚÂÁÍ‡
+        endPoint = event->pos();  // –§–∏–∫—Å–∏—Ä—É–µ–º –∫–æ–Ω–µ—á–Ω—É—é —Ç–æ—á–∫—É
+        lines.append(qMakePair(startPoint, endPoint));  // –°–æ—Ö—Ä–∞–Ω—è–µ–º —Ç–µ–∫—É—â–∏–π –æ—Ç—Ä–µ–∑–æ–∫ –≤ —Å–ø–∏—Å–æ–∫
+        isDrawing = false;  // –°–±—Ä–∞—Å—ã–≤–∞–µ–º —Ñ–ª–∞–≥ —Ä–∏—Å–æ–≤–∞–Ω–∏—è
+        update();           // –ó–∞–ø—Ä–∞—à–∏–≤–∞–µ–º –ø–µ—Ä–µ—Ä–∏—Å–æ–≤–∫—É –≤–∏–¥–∂–µ—Ç–∞ –¥–ª—è –æ—Ç–æ–±—Ä–∞–∂–µ–Ω–∏—è –Ω–æ–≤–æ–≥–æ –æ—Ç—Ä–µ–∑–∫–∞
     }
+}
+
+// –º–µ—Ç–æ–¥ –≤—ã–∑—ã–≤–∞–µ–º—ã–π –ø—Ä–∏ –∏–∑–º–µ–Ω–µ–Ω–∏–∏ –æ–±—ä–µ–∫—Ç–∞ —Ä–∞–∑–º–µ—Ä–∞
+void LineDrawerWidget::resizeEvent(QResizeEvent* event) {
+    QSize oldSize = event->oldSize();
+    QSize newSize = event->size();
+
+    if (oldSize.isValid()) {
+        float scaleX = float(newSize.width()) / oldSize.width();
+        float scaleY = float(newSize.height()) / oldSize.height();
+
+        // –ú–∞—Å—à—Ç–∞–±–∏—Ä—É–µ–º –≤—Å–µ –ª–∏–Ω–∏–∏
+        for (auto& line : lines) {
+            qDebug() << "old point:" << line.first << " scaleX:" << scaleX << " scaleY:" << scaleY;
+            line.first.setX(line.first.x() * scaleX);
+            line.first.setY(line.first.y() * scaleY);
+            qDebug() << "new point:" << line.first;
+            qDebug() << "old point:" << line.second << " scaleX:" << scaleX << " scaleY:" << scaleY;
+            line.second.setX(line.second.x() * scaleX);
+            line.second.setY(line.second.y() * scaleY);
+            qDebug() << "new point:" << line.second;
+        }
+    }
+    update(); // –ü–µ—Ä–µ—Ä–∏—Å–æ–≤–∫–∞ –ø–æ—Å–ª–µ –∏–∑–º–µ–Ω–µ–Ω–∏—è —Ä–∞–∑–º–µ—Ä–æ–≤
 }

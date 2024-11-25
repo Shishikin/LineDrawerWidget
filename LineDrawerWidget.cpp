@@ -3,10 +3,20 @@
 #include <QMouseEvent>
 #include <QDebug>
 
+int LineDrawerWidget::GetminWidth()
+{
+    return minWidth;
+}
+
+int LineDrawerWidget::GetminHeight()
+{
+    return minHeight;
+}
+
 LineDrawerWidget::LineDrawerWidget(QWidget* parent)
     : QWidget(parent), isDrawing(false)  // Инициализация виджета и установка флага isDrawing в false
 {
-    setMinimumSize(200, 200); // Устанавливаем минимальный размер
+    setMinimumSize(minWidth, minHeight); // Устанавливаем минимальный размер
 }
 
 // Очищает все отрезки и обновляет виджет для перерисовки

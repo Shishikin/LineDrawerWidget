@@ -20,7 +20,7 @@ void MainForm::OpenFile()
 		return; // Если нет, выходим из функции
 	}
 	// открытие файла
-	file.open(QIODeviceBase::ReadOnly);
+	file.open(QIODeviceBase::ReadOnly | QIODevice::Text);
 
 	// чтение данных из файла
 	QTextStream in(&file);
@@ -34,10 +34,13 @@ void MainForm::OpenFile()
 
 	std::string strPoint1X, strPoint1Y, strPoint2X, strPoint2Y;
 
+	double scaleX = static_cast<double>(m_lineDrawerWidget->size().width()) / m_lineDrawerWidget->GetminWidth();
+	double scaleY = static_cast<double>(m_lineDrawerWidget->size().height()) / m_lineDrawerWidget->GetminHeight();
+
 	while (bufer >> strPoint1X >> strPoint1Y >> strPoint2X >> strPoint2Y)
 	{
-		QPointF firstPoint(std::stod(strPoint1X), std::stod(strPoint1Y));
-		QPointF secondPoint(std::stod(strPoint2X), std::stod(strPoint2Y));
+		QPointF firstPoint(std::stod(strPoint1X) * scaleX, std::stod(strPoint1Y) * scaleY);
+		QPointF secondPoint(std::stod(strPoint2X) * scaleX, std::stod(strPoint2Y) * scaleY);
 //		QPair<QPointF, QPointF> pair(firstPoint, secondPoint);
 		m_lineDrawerWidget->lines.append(qMakePair(firstPoint, secondPoint));
 	}
@@ -46,8 +49,30 @@ void MainForm::OpenFile()
 
 void MainForm::SaveFile()
 {
-	QString fileOpen = QFileDialog::getSaveFileName(this, "выбор файла для сохранения", "", "*.txt");
+	QString fileSave = QFileDialog::getSaveFileName(this, "выбор файла для сохранения", "", "*.txt");
+	QFile file{ fileSave };
 
+	if (fileSave.isEmpty())
+	{
+		return;
+	}
+	file.open(QIODeviceBase::WriteOnly | QIODevice::Text);
+
+	QTextStream out(&file);
+
+
+
+	
+	double scaleX = static_cast<double>(m_lineDrawerWidget->size().width()) / m_lineDrawerWidget->GetminWidth();
+	double scaleY = static_cast<double>(m_lineDrawerWidget->size().height()) / m_lineDrawerWidget->GetminHeight();
+
+	for (auto& line : m_lineDrawerWidget->lines)
+	{
+		out << line.first.x() / scaleX << ' ' << line.first.y() / scaleY << ' ' << line.second.x() / scaleX << ' ' << line.second.y() / scaleY << ' ';
+	} 
+	
+
+	file.close();
 
 }
 

@@ -34,6 +34,8 @@ public:
     void clearLines();
 
     QVector<QPair<QPointF, QPointF>> lines;
+    int GetminWidth();
+    int GetminHeight();
 
 protected:
     /**
@@ -80,6 +82,8 @@ protected:
 private:
 
 //    QVector<QPair<QPointF, QPointF>> lines;  // Вектор, хранящий пары начальных и конечных точек всех отрезков
+    const int minWidth = 200;
+    const int minHeight = 200;
     QPoint startPoint;                     // Начальная точка текущего отрезка
     QPoint endPoint;                       // Конечная точка текущего отрезка
     bool isDrawing;                        // Флаг, указывающий, что в данный момент идет рисование

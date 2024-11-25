@@ -33,6 +33,8 @@ public:
      */
     void clearLines();
 
+    QVector<QPair<QPointF, QPointF>> lines;
+
 protected:
     /**
      * @brief Переопределенный метод для отрисовки виджета.
@@ -72,9 +74,12 @@ protected:
      */
     void mouseReleaseEvent(QMouseEvent* event) override;
 
+    
+    
+
 private:
 
-    QVector<QPair<QPointF, QPointF>> lines;  // Вектор, хранящий пары начальных и конечных точек всех отрезков
+//    QVector<QPair<QPointF, QPointF>> lines;  // Вектор, хранящий пары начальных и конечных точек всех отрезков
     QPoint startPoint;                     // Начальная точка текущего отрезка
     QPoint endPoint;                       // Конечная точка текущего отрезка
     bool isDrawing;                        // Флаг, указывающий, что в данный момент идет рисование

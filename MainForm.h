@@ -14,6 +14,8 @@ public:
   
     explicit MainForm(QWidget* parent = nullptr);
 
+    
+
 private:
 
     QPushButton* pushButtonClear{ nullptr };
@@ -21,7 +23,8 @@ private:
     QPushButton* pushButtonDownload{ nullptr };
     LineDrawerWidget* m_lineDrawerWidget{ nullptr };
 
-
+    void OpenFile();
+    void SaveFile();
 };
 
 #endif

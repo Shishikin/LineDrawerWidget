@@ -1,7 +1,11 @@
-﻿#include <QtWidgets>
+﻿//#include <QtWidgets>
+#include <QApplication>
+#include <QWidget>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
 #include <QFileDialog>
 #include <QFile>
-
 #include <QString>
 #include <string>
 #include <sstream>

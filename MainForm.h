@@ -1,10 +1,10 @@
 ﻿#ifndef MAINFORM
 #define MAINFORM
 
-#include <QtWidgets>
 
-class LineDrawerWidget;
-
+#include <QWidget>
+#include "LineDrawerWidget.h"
+class QPushButton;
 
 class MainForm : public QWidget
 {

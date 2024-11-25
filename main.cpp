@@ -1,4 +1,8 @@
-﻿#include <QtWidgets>
+﻿//#include <QtWidgets>
+#include <QWidget>
+#include <QApplication>
+#include <QStyleFactory>
+
 #include "LineDrawerWidget.h"
 #include "MainForm.h"
 

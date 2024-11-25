@@ -16,7 +16,8 @@ void MainForm::OpenFile()
 	QFile file{ fileOpen };
 	
 	// Проверяем, был ли выбран файл
-	if (fileOpen.isEmpty()) {
+	if (fileOpen.isEmpty()) 
+	{
 		return; // Если нет, выходим из функции
 	}
 	// открытие файла
@@ -41,8 +42,8 @@ void MainForm::OpenFile()
 	{
 		QPointF firstPoint(std::stod(strPoint1X) * scaleX, std::stod(strPoint1Y) * scaleY);
 		QPointF secondPoint(std::stod(strPoint2X) * scaleX, std::stod(strPoint2Y) * scaleY);
-//		QPair<QPointF, QPointF> pair(firstPoint, secondPoint);
-		m_lineDrawerWidget->lines.append(qMakePair(firstPoint, secondPoint));
+		QPair<QPointF, QPointF> pair(firstPoint, secondPoint);
+		m_lineDrawerWidget->PushBack(pair);
 	}
 }
 
@@ -66,7 +67,7 @@ void MainForm::SaveFile()
 	double scaleX = static_cast<double>(m_lineDrawerWidget->size().width()) / m_lineDrawerWidget->GetminWidth();
 	double scaleY = static_cast<double>(m_lineDrawerWidget->size().height()) / m_lineDrawerWidget->GetminHeight();
 
-	for (auto& line : m_lineDrawerWidget->lines)
+	for (auto& line : m_lineDrawerWidget->GetLines())
 	{
 		out << line.first.x() / scaleX << ' ' << line.first.y() / scaleY << ' ' << line.second.x() / scaleX << ' ' << line.second.y() / scaleY << ' ';
 	} 

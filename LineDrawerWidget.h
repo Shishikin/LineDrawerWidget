@@ -33,9 +33,12 @@ public:
      */
     void clearLines();
 
-    QVector<QPair<QPointF, QPointF>> lines;
-    int GetminWidth();
-    int GetminHeight();
+//    QVector<QPair<QPointF, QPointF>> lines;
+    const int GetminWidth() const;
+    const int GetminHeight() const;
+
+    void PushBack(QPair<QPointF, QPointF>);
+    const QVector<QPair<QPointF, QPointF>>& GetLines() const;
 
 protected:
     /**
@@ -81,7 +84,7 @@ protected:
 
 private:
 
-//    QVector<QPair<QPointF, QPointF>> lines;  // Вектор, хранящий пары начальных и конечных точек всех отрезков
+    QVector<QPair<QPointF, QPointF>> lines;  // Вектор, хранящий пары начальных и конечных точек всех отрезков
     const int minWidth = 200;
     const int minHeight = 200;
     QPoint startPoint;                     // Начальная точка текущего отрезка

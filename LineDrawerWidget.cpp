@@ -3,12 +3,12 @@
 #include <QMouseEvent>
 #include <QDebug>
 
-int LineDrawerWidget::GetminWidth()
+const int LineDrawerWidget::GetminWidth() const
 {
     return minWidth;
 }
 
-int LineDrawerWidget::GetminHeight()
+const int LineDrawerWidget::GetminHeight() const
 {
     return minHeight;
 }
@@ -24,6 +24,16 @@ void LineDrawerWidget::clearLines()
 {
     lines.clear();  // Очищаем вектор отрезков
     update();       // Запрашиваем перерисовку виджета
+}
+
+void LineDrawerWidget::PushBack(QPair<QPointF, QPointF> pair)
+{
+    lines.push_back(pair);
+}
+
+const QVector<QPair<QPointF, QPointF>>& LineDrawerWidget::GetLines() const
+{
+    return lines;
 }
 
 // Метод отрисовки, вызываемый при необходимости перерисовать виджет
@@ -79,16 +89,19 @@ void LineDrawerWidget::mouseReleaseEvent(QMouseEvent* event)
 }
 
 // метод вызываемый при изменении объекта размера
-void LineDrawerWidget::resizeEvent(QResizeEvent* event) {
+void LineDrawerWidget::resizeEvent(QResizeEvent* event) 
+{
     QSize oldSize = event->oldSize();
     QSize newSize = event->size();
 
-    if (oldSize.isValid()) {
+    if (oldSize.isValid()) 
+    {
         float scaleX = float(newSize.width()) / oldSize.width();
         float scaleY = float(newSize.height()) / oldSize.height();
 
         // Масштабируем все линии
-        for (auto& line : lines) {
+        for (auto& line : lines) 
+        {
             qDebug() << QString::fromUtf8("Старая точка:") << line.first << " scaleX:" << scaleX << " scaleY:" << scaleY;
             line.first.setX(line.first.x() * scaleX);
             line.first.setY(line.first.y() * scaleY);
